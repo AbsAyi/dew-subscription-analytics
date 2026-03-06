@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: "Date dimension."
+    columns:
+      - name: date_key
+        tests: [unique, not_null]
+
+  - name: dim_products
+    description: "Product dimension with supply tier."
+    columns:
+      - name: sku
+        tests: [unique, not_null]
+
+  - name: dim_customers
+    description: "Customer dimension with lifetime metrics."
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: customer_type
+        tests:
+          - accepted_values:
+              values: ['subscriber', 'one_time']
+
+  - name: fct_orders
+    description: "Order fact table."
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests:
+          - not_null
+
+  - name: fct_subscriptions
+    description: "Subscription fact with charge metrics."
+    columns:
+      - name: subscription_id
+        tests: [unique, not_null]
+      - name: monthly_recurring_revenue
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+  - name: fct_charges
+    description: "Charge attempt fact (success + failures)."
+    columns:
+      - name: charge_id
+        tests: [unique, not_null]
