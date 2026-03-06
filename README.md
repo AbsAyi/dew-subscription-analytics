@@ -1,4 +1,4 @@
-# Dew Skincare — Subscription Analytics Pipeline
+# Dew Skincare: Subscription Analytics Engineering Pipeline (Snowflake + dbt + Power BI)
 
 A production-grade analytics engineering project for a fictional DTC skincare subscription brand. Built with **Snowflake**, **dbt**, and **Power BI** to demonstrate end-to-end analytics infrastructure: from messy multi-platform source data to governed, decision-ready reporting.
 
