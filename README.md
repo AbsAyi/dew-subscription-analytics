@@ -14,26 +14,7 @@ This project models the real-world challenge of reconciling these sources into a
 
 ## Architecture
 
-```
-Sources (Snowflake raw)          Staging (dbt)              Marts (dbt)                Power BI
-┌──────────────────┐     ┌─────────────────────┐    ┌──────────────────────┐    ┌────────────────┐
-│ raw_shopify      │────▶│ stg_shopify__orders  │───▶│ fct_orders           │───▶│ Executive      │
-│   .orders        │     │ stg_shopify__        │    │ fct_subscriptions    │    │ Dashboard      │
-│   .line_items    │     │   customers          │    │ fct_charges          │    │                │
-│   .customers     │     │ stg_shopify__        │    │ fct_subscription_    │    │ • MRR trends   │
-├──────────────────┤     │   line_items         │    │   events             │    │ • Cohort       │
-│ raw_recharge     │────▶│ stg_recharge__       │    ├──────────────────────┤    │   retention    │
-│   .subscriptions │     │   subscriptions      │    │ dim_customers        │    │ • LTV by       │
-│   .charges       │     │ stg_recharge__       │    │ dim_products         │    │   channel      │
-│   .customers     │     │   charges            │    │ dim_dates            │    │ • Churn        │
-├──────────────────┤     │ stg_recharge__       │    ├──────────────────────┤    │   decomp.      │
-│ raw_stripe       │────▶│   customers          │    │ rpt_monthly_cohort   │    │ • Revenue      │
-│   .charges       │     │ stg_stripe__charges  │    │   _retention         │    │   reconcil.    │
-│   .refunds       │     │ stg_stripe__refunds  │    │ rpt_revenue_recon    │    └────────────────┘
-└──────────────────┘     └─────────────────────┘    │ rpt_subscription_    │
-                                                     │   health             │
-                                                     └──────────────────────┘
-```
+![Subscription Analytics Architecture](docs/architecture.svg)
 
 ---
 
