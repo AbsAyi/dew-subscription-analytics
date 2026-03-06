@@ -14,7 +14,13 @@ This project models the real-world challenge of reconciling these sources into a
 
 ## Architecture
 
-![Subscription Analytics Architecture](docs/architecture.svg)
+![Architecture](./docs/architecture.svg)
+
+## Lineage Graph
+
+![dbt Lineage Graph](./docs/dag_screenshot.png)
+
+[Explore the interactive dbt docs →](https://absayi.github.io/dew-subscription-analytics/)
 
 ---
 
@@ -193,12 +199,6 @@ Tests are where you prove you think about data quality, not just data.
     expression: "abs(shopify_revenue - stripe_settled_revenue) / nullif(shopify_revenue, 0) < 0.05"
     # Shopify and Stripe should agree within 5%
 ```
-
----
-
-## Documentation
-
-[Explore the interactive dbt docs →](https://absayi.github.io/dew-subscription-analytics/)
 
 ---
 
