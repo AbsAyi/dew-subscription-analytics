@@ -101,14 +101,9 @@ dew-subscription-analytics/
 │   │       └── rpt_subscription_health.sql
 │   └── utilities/
 │       └── dim_dates.sql
-├── tests/
-│   └── generic/                        # Custom generic tests
 ├── macros/
 │   ├── cents_to_dollars.sql
-│   ├── generate_date_spine.sql
 │   └── safe_divide.sql
-├── analyses/
-│   └── data_quality_audit.sql          # Ad-hoc quality checks
 └── scripts/
     └── generate_synthetic_data.py      # Data generator (this repo)
 ```
