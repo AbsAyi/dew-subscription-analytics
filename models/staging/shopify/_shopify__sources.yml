@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: shopify
+    description: "Shopify eCommerce platform data for Dew Skincare"
+    schema: PUBLIC_RAW
+    tables:
+      - name: raw_shopify__orders
+        description: "Raw Shopify orders. Contains duplicate records from webhook retries. Timestamps in EST (UTC-5)."
+        columns:
+          - name: id
+            description: "Shopify order ID"
+            tests:
+              - not_null
+          - name: customer_id
+            description: "Shopify customer ID"
+            tests:
+              - not_null
+          - name: financial_status
+            tests:
+              - accepted_values:
+                  values: ['paid', 'pending', 'refunded', 'partially_refunded', 'voided']
+
+      - name: raw_shopify__customers
+        description: "Shopify customer records"
+        columns:
+          - name: id
+            description: "Shopify customer ID"
+            tests:
+              - unique
+              - not_null
+
+      - name: raw_shopify__order_line_items
+        description: "Order line items with product and pricing details"
+        columns:
+          - name: id
+            tests:
+              - not_null
+          - name: order_id
+            tests:
+              - not_null

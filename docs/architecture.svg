@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720" style="font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    
+    <!-- Arrow marker -->
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3fb950"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#bc8cff"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#d29922"/>
+    </marker>
+
+    <!-- Box shadow filter -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="720" fill="url(#bgGrad)" rx="12"/>
+  
+  <!-- Title -->
+  <text x="600" y="42" text-anchor="middle" fill="#e6edf3" font-size="18" font-weight="700" letter-spacing="0.5">🧴 Dew Skincare — Analytics Pipeline Architecture</text>
+  <text x="600" y="62" text-anchor="middle" fill="#8b949e" font-size="11">Snowflake  →  dbt  →  Power BI</text>
+
+  <!-- ==================== COLUMN HEADERS ==================== -->
+  <!-- Sources -->
+  <text x="105" y="95" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600" letter-spacing="1">SOURCES</text>
+  <text x="105" y="109" text-anchor="middle" fill="#484f58" font-size="9">Snowflake raw</text>
+  
+  <!-- Staging -->
+  <text x="340" y="95" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600" letter-spacing="1">STAGING</text>
+  <text x="340" y="109" text-anchor="middle" fill="#484f58" font-size="9">dbt views</text>
+
+  <!-- Intermediate -->
+  <text x="570" y="95" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600" letter-spacing="1">INTERMEDIATE</text>
+  <text x="570" y="109" text-anchor="middle" fill="#484f58" font-size="9">dbt ephemeral</text>
+
+  <!-- Marts -->
+  <text x="800" y="95" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600" letter-spacing="1">MARTS</text>
+  <text x="800" y="109" text-anchor="middle" fill="#484f58" font-size="9">dbt tables</text>
+
+  <!-- Power BI -->
+  <text x="1040" y="95" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600" letter-spacing="1">POWER BI</text>
+  <text x="1040" y="109" text-anchor="middle" fill="#484f58" font-size="9">Consumption</text>
+
+  <!-- Vertical divider lines -->
+  <line x1="220" y1="85" x2="220" y2="700" stroke="#21262d" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="455" y1="85" x2="455" y2="700" stroke="#21262d" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="685" y1="85" x2="685" y2="700" stroke="#21262d" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="920" y1="85" x2="920" y2="700" stroke="#21262d" stroke-width="1" stroke-dasharray="4,4"/>
+
+
+  <!-- ==================== SHOPIFY ROW ==================== -->
+  <!-- Source: Shopify -->
+  <rect x="20" y="130" width="170" height="140" rx="6" fill="#1c2128" stroke="#f0883e" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="20" y="130" width="170" height="26" rx="6" fill="#f0883e" opacity="0.15"/>
+  <text x="105" y="148" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="700">raw_shopify</text>
+  <text x="36" y="174" fill="#8b949e" font-size="10">├ orders</text>
+  <text x="36" y="192" fill="#8b949e" font-size="10">├ order_line_items</text>
+  <text x="36" y="210" fill="#8b949e" font-size="10">└ customers</text>
+  <text x="36" y="234" fill="#484f58" font-size="8" font-style="italic">⚠ dupes, EST timestamps</text>
+  <text x="36" y="248" fill="#484f58" font-size="8" font-style="italic">⚠ attribution gaps</text>
+
+  <!-- Staging: Shopify -->
+  <rect x="240" y="130" width="200" height="140" rx="6" fill="#1c2128" stroke="#58a6ff" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="240" y="130" width="200" height="26" rx="6" fill="#58a6ff" opacity="0.12"/>
+  <text x="340" y="148" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="700">stg_shopify__*</text>
+  <text x="256" y="174" fill="#c9d1d9" font-size="10">stg_shopify__orders</text>
+  <text x="256" y="192" fill="#c9d1d9" font-size="10">stg_shopify__line_items</text>
+  <text x="256" y="210" fill="#c9d1d9" font-size="10">stg_shopify__customers</text>
+  <text x="256" y="234" fill="#3fb950" font-size="8">✓ deduplicated</text>
+  <text x="256" y="248" fill="#3fb950" font-size="8">✓ EST → UTC converted</text>
+
+  <!-- Arrow: Shopify source → staging -->
+  <line x1="190" y1="200" x2="238" y2="200" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+
+  <!-- ==================== RECHARGE ROW ==================== -->
+  <!-- Source: Recharge -->
+  <rect x="20" y="300" width="170" height="140" rx="6" fill="#1c2128" stroke="#a371f7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="20" y="300" width="170" height="26" rx="6" fill="#a371f7" opacity="0.15"/>
+  <text x="105" y="318" text-anchor="middle" fill="#a371f7" font-size="11" font-weight="700">raw_recharge</text>
+  <text x="36" y="344" fill="#8b949e" font-size="10">├ subscriptions</text>
+  <text x="36" y="362" fill="#8b949e" font-size="10">├ charges</text>
+  <text x="36" y="380" fill="#8b949e" font-size="10">└ customers</text>
+  <text x="36" y="404" fill="#484f58" font-size="8" font-style="italic">⚠ status mismatches</text>
+  <text x="36" y="418" fill="#484f58" font-size="8" font-style="italic">⚠ TZ inconsistencies</text>
+
+  <!-- Staging: Recharge -->
+  <rect x="240" y="300" width="200" height="140" rx="6" fill="#1c2128" stroke="#58a6ff" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="240" y="300" width="200" height="26" rx="6" fill="#58a6ff" opacity="0.12"/>
+  <text x="340" y="318" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="700">stg_recharge__*</text>
+  <text x="256" y="344" fill="#c9d1d9" font-size="10">stg_recharge__subscriptions</text>
+  <text x="256" y="362" fill="#c9d1d9" font-size="10">stg_recharge__charges</text>
+  <text x="256" y="380" fill="#c9d1d9" font-size="10">stg_recharge__customers</text>
+  <text x="256" y="404" fill="#3fb950" font-size="8">✓ status mismatches resolved</text>
+  <text x="256" y="418" fill="#3fb950" font-size="8">✓ error categories parsed</text>
+
+  <!-- Arrow: Recharge source → staging -->
+  <line x1="190" y1="370" x2="238" y2="370" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+
+  <!-- ==================== STRIPE ROW ==================== -->
+  <!-- Source: Stripe -->
+  <rect x="20" y="470" width="170" height="130" rx="6" fill="#1c2128" stroke="#39d353" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="20" y="470" width="170" height="26" rx="6" fill="#39d353" opacity="0.15"/>
+  <text x="105" y="488" text-anchor="middle" fill="#39d353" font-size="11" font-weight="700">raw_stripe</text>
+  <text x="36" y="514" fill="#8b949e" font-size="10">├ charges</text>
+  <text x="36" y="532" fill="#8b949e" font-size="10">└ refunds</text>
+  <text x="36" y="556" fill="#484f58" font-size="8" font-style="italic">⚠ amounts in cents</text>
+  <text x="36" y="570" fill="#484f58" font-size="8" font-style="italic">⚠ ghost failures, orphans</text>
+
+  <!-- Staging: Stripe -->
+  <rect x="240" y="470" width="200" height="130" rx="6" fill="#1c2128" stroke="#58a6ff" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="240" y="470" width="200" height="26" rx="6" fill="#58a6ff" opacity="0.12"/>
+  <text x="340" y="488" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="700">stg_stripe__*</text>
+  <text x="256" y="514" fill="#c9d1d9" font-size="10">stg_stripe__charges</text>
+  <text x="256" y="532" fill="#c9d1d9" font-size="10">stg_stripe__refunds</text>
+  <text x="256" y="556" fill="#3fb950" font-size="8">✓ cents → dollars</text>
+  <text x="256" y="570" fill="#3fb950" font-size="8">✓ ghost failures flagged</text>
+
+  <!-- Arrow: Stripe source → staging -->
+  <line x1="190" y1="535" x2="238" y2="535" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+
+  <!-- ==================== INTERMEDIATE ==================== -->
+  <!-- int_orders__enriched -->
+  <rect x="475" y="135" width="190" height="60" rx="6" fill="#1c2128" stroke="#d29922" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="570" y="160" text-anchor="middle" fill="#d29922" font-size="10" font-weight="700">int_orders__enriched</text>
+  <text x="570" y="178" text-anchor="middle" fill="#8b949e" font-size="8">orders + items + attribution</text>
+
+  <!-- int_customers__unified -->
+  <rect x="475" y="220" width="190" height="60" rx="6" fill="#1c2128" stroke="#d29922" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="570" y="245" text-anchor="middle" fill="#d29922" font-size="10" font-weight="700">int_customers__unified</text>
+  <text x="570" y="263" text-anchor="middle" fill="#8b949e" font-size="8">customer spine across sources</text>
+
+  <!-- int_payments__reconciled -->
+  <rect x="475" y="305" width="190" height="60" rx="6" fill="#1c2128" stroke="#d29922" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="570" y="330" text-anchor="middle" fill="#d29922" font-size="10" font-weight="700">int_payments__reconciled</text>
+  <text x="570" y="348" text-anchor="middle" fill="#8b949e" font-size="8">Shopify ↔ Stripe matching</text>
+
+  <!-- Arrows: Staging → Intermediate -->
+  <line x1="440" y1="170" x2="473" y2="165" stroke="#d29922" stroke-width="1.2" marker-end="url(#arrowOrange)"/>
+  <line x1="440" y1="200" x2="473" y2="245" stroke="#d29922" stroke-width="1.2" marker-end="url(#arrowOrange)"/>
+  <line x1="440" y1="370" x2="473" y2="330" stroke="#d29922" stroke-width="1.2" marker-end="url(#arrowOrange)"/>
+  <line x1="440" y1="370" x2="473" y2="250" stroke="#d29922" stroke-width="1.2" marker-end="url(#arrowOrange)" opacity="0.5"/>
+  <line x1="440" y1="535" x2="473" y2="335" stroke="#d29922" stroke-width="1.2" marker-end="url(#arrowOrange)"/>
+
+
+  <!-- ==================== MARTS — DIMENSIONS ==================== -->
+  <rect x="710" y="130" width="180" height="100" rx="6" fill="#1c2128" stroke="#bc8cff" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="710" y="130" width="180" height="24" rx="6" fill="#bc8cff" opacity="0.12"/>
+  <text x="800" y="147" text-anchor="middle" fill="#bc8cff" font-size="10" font-weight="700">Dimensions</text>
+  <text x="726" y="168" fill="#c9d1d9" font-size="9.5">dim_customers</text>
+  <text x="726" y="185" fill="#c9d1d9" font-size="9.5">dim_products</text>
+  <text x="726" y="202" fill="#c9d1d9" font-size="9.5">dim_dates</text>
+
+  <!-- MARTS — FACTS -->
+  <rect x="710" y="255" width="180" height="115" rx="6" fill="#1c2128" stroke="#bc8cff" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="710" y="255" width="180" height="24" rx="6" fill="#bc8cff" opacity="0.12"/>
+  <text x="800" y="272" text-anchor="middle" fill="#bc8cff" font-size="10" font-weight="700">Facts</text>
+  <text x="726" y="293" fill="#c9d1d9" font-size="9.5">fct_orders</text>
+  <text x="726" y="310" fill="#c9d1d9" font-size="9.5">fct_subscriptions</text>
+  <text x="726" y="327" fill="#c9d1d9" font-size="9.5">fct_charges</text>
+  <text x="726" y="344" fill="#c9d1d9" font-size="9.5">fct_subscription_events</text>
+
+  <!-- MARTS — REPORTING -->
+  <rect x="710" y="395" width="180" height="115" rx="6" fill="#1c2128" stroke="#3fb950" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="710" y="395" width="180" height="24" rx="6" fill="#3fb950" opacity="0.12"/>
+  <text x="800" y="412" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="700">Reporting</text>
+  <text x="726" y="434" fill="#c9d1d9" font-size="9.5">rpt_monthly_cohort</text>
+  <text x="726" y="449" fill="#c9d1d9" font-size="9.5">  _retention</text>
+  <text x="726" y="468" fill="#c9d1d9" font-size="9.5">rpt_revenue_recon</text>
+  <text x="726" y="487" fill="#c9d1d9" font-size="9.5">rpt_subscription_health</text>
+
+  <!-- Arrows: Intermediate → Marts -->
+  <line x1="665" y1="165" x2="708" y2="170" stroke="#bc8cff" stroke-width="1.2" marker-end="url(#arrowPurple)"/>
+  <line x1="665" y1="250" x2="708" y2="200" stroke="#bc8cff" stroke-width="1.2" marker-end="url(#arrowPurple)"/>
+  <line x1="665" y1="250" x2="708" y2="300" stroke="#bc8cff" stroke-width="1.2" marker-end="url(#arrowPurple)"/>
+  <line x1="665" y1="335" x2="708" y2="320" stroke="#bc8cff" stroke-width="1.2" marker-end="url(#arrowPurple)"/>
+
+  <!-- Arrows: Facts → Reporting -->
+  <line x1="800" y1="370" x2="800" y2="393" stroke="#3fb950" stroke-width="1.2" marker-end="url(#arrowGreen)"/>
+
+
+  <!-- ==================== POWER BI ==================== -->
+  <rect x="940" y="155" width="200" height="380" rx="8" fill="#1c2128" stroke="#f78166" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="940" y="155" width="200" height="30" rx="8" fill="#f78166" opacity="0.15"/>
+  <text x="1040" y="175" text-anchor="middle" fill="#f78166" font-size="11" font-weight="700">📊 Power BI Dashboard</text>
+  
+  <!-- Dashboard pages -->
+  <rect x="955" y="198" width="170" height="42" rx="4" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="1040" y="216" text-anchor="middle" fill="#e6edf3" font-size="9.5" font-weight="600">Subscription Health</text>
+  <text x="1040" y="230" text-anchor="middle" fill="#8b949e" font-size="8">MRR · Active Subs · Churn</text>
+
+  <rect x="955" y="250" width="170" height="42" rx="4" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="1040" y="268" text-anchor="middle" fill="#e6edf3" font-size="9.5" font-weight="600">Cohort Retention</text>
+  <text x="1040" y="282" text-anchor="middle" fill="#8b949e" font-size="8">Heatmap · LTV Curves</text>
+
+  <rect x="955" y="302" width="170" height="42" rx="4" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="1040" y="320" text-anchor="middle" fill="#e6edf3" font-size="9.5" font-weight="600">Revenue Reconciliation</text>
+  <text x="1040" y="334" text-anchor="middle" fill="#8b949e" font-size="8">Shopify vs Stripe · Variance</text>
+
+  <rect x="955" y="354" width="170" height="42" rx="4" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="1040" y="372" text-anchor="middle" fill="#e6edf3" font-size="9.5" font-weight="600">Channel Performance</text>
+  <text x="1040" y="386" text-anchor="middle" fill="#8b949e" font-size="8">LTV by Channel · CAC</text>
+
+  <!-- DAX measures note -->
+  <rect x="955" y="410" width="170" height="55" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="1040" y="430" text-anchor="middle" fill="#58a6ff" font-size="8.5" font-weight="600">DAX Semantic Layer</text>
+  <text x="1040" y="444" text-anchor="middle" fill="#8b949e" font-size="7.5">MRR = SUMX(active_subs, price)</text>
+  <text x="1040" y="456" text-anchor="middle" fill="#8b949e" font-size="7.5">Retention% · LTV · Churn Rate</text>
+
+  <!-- Arrows: Marts → Power BI -->
+  <line x1="890" y1="310" x2="938" y2="310" stroke="#f78166" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="890" y1="450" x2="938" y2="370" stroke="#f78166" stroke-width="1.2" marker-end="url(#arrow)" opacity="0.6"/>
+
+
+  <!-- ==================== TESTS BADGE ==================== -->
+  <rect x="475" y="420" width="190" height="75" rx="6" fill="#1c2128" stroke="#3fb950" stroke-width="1" stroke-dasharray="4,3" filter="url(#shadow)"/>
+  <text x="570" y="443" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="700">🧪 YAML Tests</text>
+  <text x="570" y="460" text-anchor="middle" fill="#8b949e" font-size="8">unique · not_null · accepted_values</text>
+  <text x="570" y="474" text-anchor="middle" fill="#8b949e" font-size="8">relationships · expression_is_true</text>
+  <text x="570" y="488" text-anchor="middle" fill="#8b949e" font-size="8">recency · revenue reconciliation</text>
+
+
+  <!-- ==================== DATA QUALITY LEGEND ==================== -->
+  <rect x="20" y="635" width="1160" height="65" rx="6" fill="#161b22" stroke="#21262d" stroke-width="1"/>
+  <text x="40" y="656" fill="#8b949e" font-size="10" font-weight="600">Embedded Data Quality Issues:</text>
+  
+  <circle cx="40" cy="677" r="4" fill="#f0883e"/>
+  <text x="50" y="681" fill="#8b949e" font-size="9">Webhook duplicates</text>
+  
+  <circle cx="195" cy="677" r="4" fill="#f0883e"/>
+  <text x="205" y="681" fill="#8b949e" font-size="9">EST/UTC mismatch</text>
+  
+  <circle cx="340" cy="677" r="4" fill="#f0883e"/>
+  <text x="350" y="681" fill="#8b949e" font-size="9">Attribution nulls (60%)</text>
+  
+  <circle cx="510" cy="677" r="4" fill="#a371f7"/>
+  <text x="520" y="681" fill="#8b949e" font-size="9">Status mismatches</text>
+  
+  <circle cx="660" cy="677" r="4" fill="#39d353"/>
+  <text x="670" y="681" fill="#8b949e" font-size="9">Ghost failures</text>
+  
+  <circle cx="790" cy="677" r="4" fill="#39d353"/>
+  <text x="800" y="681" fill="#8b949e" font-size="9">Orphaned refunds</text>
+  
+  <circle cx="935" cy="677" r="4" fill="#39d353"/>
+  <text x="945" y="681" fill="#8b949e" font-size="9">Cents vs. dollars</text>
+
+  <circle cx="1075" cy="677" r="4" fill="#a371f7"/>
+  <text x="1085" y="681" fill="#8b949e" font-size="9">ID mapping</text>
+
+</svg>

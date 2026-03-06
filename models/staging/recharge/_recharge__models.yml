@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_recharge__subscriptions
+    description: >
+      Cleaned subscription records with status mismatches resolved.
+      If cancelled_at is populated but status='active', resolved to 'cancelled'.
+    columns:
+      - name: subscription_id
+        tests:
+          - unique
+          - not_null
+      - name: recharge_customer_id
+        tests:
+          - not_null
+      - name: subscription_status
+        tests:
+          - accepted_values:
+              values: ['active', 'cancelled', 'expired']
+
+  - name: stg_recharge__charges
+    description: >
+      All charge attempts including failures. Failed charges may have null 
+      shopify_order_id — this is expected, not a data quality issue.
+    columns:
+      - name: charge_id
+        tests:
+          - unique
+          - not_null
+      - name: charge_status
+        tests:
+          - accepted_values:
+              values: ['SUCCESS', 'ERROR', 'DECLINED', 'QUEUED', 'REFUNDED']
+
+  - name: stg_recharge__customers
+    description: "Cleaned Recharge customer records with Shopify ID mapping."
+    columns:
+      - name: recharge_customer_id
+        tests:
+          - unique
+          - not_null
+      - name: shopify_customer_id
+        tests:
+          - unique
+          - not_null

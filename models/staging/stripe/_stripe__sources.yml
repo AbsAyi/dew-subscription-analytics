@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: stripe
+    description: "Stripe payment processing data"
+    schema: PUBLIC_RAW
+    tables:
+      - name: raw_stripe__charges
+        description: >
+          All payment charge attempts. Amount is in cents (Stripe convention).
+          Includes ghost failures that may not have corresponding Recharge records.
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ['succeeded', 'failed', 'pending']
+
+      - name: raw_stripe__refunds
+        description: >
+          Refund records. Some refunds exist in Stripe but the corresponding 
+          Shopify order financial_status was never updated (orphaned refunds).
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null

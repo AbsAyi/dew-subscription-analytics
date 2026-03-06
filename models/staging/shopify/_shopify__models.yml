@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: stg_shopify__orders
+    description: >
+      Deduplicated and cleaned Shopify orders. Webhook retry duplicates removed.
+      Timestamps converted from EST to UTC. UTM parameters parsed from landing_site.
+    columns:
+      - name: order_id
+        description: "Unique Shopify order identifier (deduplicated)"
+        tests:
+          - unique
+          - not_null
+      - name: shopify_customer_id
+        tests:
+          - not_null
+      - name: gross_revenue
+        tests:
+          - not_null
+      - name: financial_status
+        tests:
+          - accepted_values:
+              values: ['paid', 'pending', 'refunded', 'partially_refunded', 'voided']
+
+  - name: stg_shopify__customers
+    description: "Cleaned Shopify customer records with standardized emails and names."
+    columns:
+      - name: shopify_customer_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_email
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_shopify__order_line_items
+    description: "Deduplicated order line items with calculated line-level revenue."
+    columns:
+      - name: line_item_id
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        tests:
+          - not_null

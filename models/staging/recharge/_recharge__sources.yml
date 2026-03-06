@@ -1,0 +1,45 @@
+version: 2
+
+sources:
+  - name: recharge
+    description: "Recharge subscription management platform data"
+    schema: PUBLIC_RAW
+    tables:
+      - name: raw_recharge__subscriptions
+        description: >
+          Subscription records. Known issue: some records show status='active' 
+          but have a non-null cancelled_at date — status mismatch that must be 
+          resolved in staging.
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: customer_id
+            tests:
+              - not_null
+
+      - name: raw_recharge__charges
+        description: >
+          Charge attempts (successful and failed). Timestamps in UTC.
+          Failed charges may not have a corresponding Shopify order ID.
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ['SUCCESS', 'ERROR', 'DECLINED', 'QUEUED', 'REFUNDED']
+
+      - name: raw_recharge__customers
+        description: "Recharge customer records with Shopify customer ID mapping"
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: shopify_customer_id
+            tests:
+              - not_null

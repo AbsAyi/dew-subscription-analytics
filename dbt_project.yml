@@ -1,0 +1,87 @@
+name: 'dew_subscription_analytics'
+version: '1.0.0'
+
+profile: 'dew_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  dew_subscription_analytics:
+    +schema: raw
+    raw_shopify__customers:
+      +column_types:
+        id: bigint
+        orders_count: integer
+        total_spent: float
+    raw_shopify__orders:
+      +column_types:
+        id: bigint
+        order_number: integer
+        customer_id: bigint
+        subtotal_price: float
+        total_tax: float
+        total_shipping: float
+        total_price: float
+        total_discounts: float
+    raw_shopify__order_line_items:
+      +column_types:
+        id: bigint
+        order_id: bigint
+        quantity: integer
+        price: float
+        total_discount: float
+    raw_recharge__customers:
+      +column_types:
+        id: bigint
+        shopify_customer_id: bigint
+    raw_recharge__subscriptions:
+      +column_types:
+        id: bigint
+        customer_id: bigint
+        shopify_customer_id: bigint
+        price: float
+        quantity: integer
+        charge_interval_frequency: integer
+    raw_recharge__charges:
+      +column_types:
+        id: bigint
+        subscription_id: bigint
+        customer_id: bigint
+        shopify_order_id: bigint
+        total_price: float
+        subtotal_price: float
+        tax_lines: float
+    raw_stripe__charges:
+      +column_types:
+        amount: bigint
+        amount_refunded: bigint
+        metadata_shopify_order_id: bigint
+        metadata_recharge_charge_id: bigint
+    raw_stripe__refunds:
+      +column_types:
+        amount: bigint
+        metadata_shopify_order_id: bigint
+
+models:
+  dew_subscription_analytics:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: ephemeral
+    marts:
+      core:
+        +materialized: table
+        +schema: marts
+      reporting:
+        +materialized: table
+        +schema: reporting

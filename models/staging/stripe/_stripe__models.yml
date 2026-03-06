@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_stripe__charges
+    description: >
+      Cleaned Stripe charges with amounts converted from cents to dollars.
+      Includes ghost failure flag for charges with no Shopify/Recharge reference.
+    columns:
+      - name: stripe_charge_id
+        tests:
+          - unique
+          - not_null
+      - name: charge_amount
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+  - name: stg_stripe__refunds
+    description: >
+      Cleaned Stripe refunds with amounts in dollars. Includes orphaned refunds 
+      where Shopify financial_status was never updated.
+    columns:
+      - name: stripe_refund_id
+        tests:
+          - unique
+          - not_null
+      - name: refund_amount
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
