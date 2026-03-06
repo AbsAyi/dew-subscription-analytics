@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: rpt_monthly_cohort_retention
+    description: "Cohort retention rates. Powers the heatmap."
+    columns:
+      - name: retention_rate
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "<= 1.0"
+
+  - name: rpt_revenue_reconciliation
+    description: "Monthly Shopify vs Stripe revenue with variance flags."
+    columns:
+      - name: order_month
+        tests: [unique, not_null]
+
+  - name: rpt_subscription_health
+    description: "Monthly subscription KPIs."
+    columns:
+      - name: report_month
+        tests: [unique, not_null]
+      - name: monthly_recurring_revenue
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
