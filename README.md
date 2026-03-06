@@ -196,6 +196,12 @@ Tests are where you prove you think about data quality, not just data.
 
 ---
 
+## Documentation
+
+[Explore the interactive dbt docs →](https://absayi.github.io/dew-subscription-analytics/)
+
+---
+
 ## Power BI Dashboard Design
 
 ### Page 1: Subscription Health Overview
